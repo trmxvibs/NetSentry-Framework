@@ -1,7 +1,12 @@
 #  NET-SENTRY
 > **The Ultimate Automated Reconnaissance & Vulnerability Assessment System**
 
-![Version](https://img.shields.io/badge/version-29.0_God_Mode-red) ![Python](https://img.shields.io/badge/python-3.x-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-Operational-orange)
+
+![Version](https://img.shields.io/badge/Version-v29.0_God_Mode-FF0055?style=for-the-badge&logo=hackthebox&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Status](https://img.shields.io/badge/Status-OPERATIONAL-success?style=for-the-badge&logo=activity)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Maintenance](https://img.shields.io/badge/Maintenance-Active-chartreuse?style=for-the-badge)
 
 **Net-Sentry** is a military-grade offensive security framework designed to automate the reconnaissance and vulnerability assessment phase. It combines the power of multiple scanning engines into a single **Unified Command Console**.
 
@@ -34,6 +39,7 @@ Net-Sentry operates on a modular architecture, deploying specialized engines for
 
 ---
 ##  Visual Gallery
+[![Daily Auto-Update](https://github.com/trmxvibs/Net-Sentry/actions/workflows/daily_update.yml/badge.svg)](https://github.com/trmxvibs/Net-Sentry/actions/workflows/daily_update.yml)
 
 <img width="1911" height="930" alt="image" src="https://github.com/user-attachments/assets/14deb141-ed8a-496c-8cf4-19dc90df9532" />
 
@@ -62,6 +68,12 @@ Before deploying Net-Sentry, ensure your system meets the following requirements
 ---
 
 ##  Installation
+###  Built With
+![Flask](https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white)
+![Nmap](https://img.shields.io/badge/Nmap-Engine-blue?style=flat&logo=nmap&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet-Maps-199900?style=flat&logo=leaflet&logoColor=white)
+![Vis.js](https://img.shields.io/badge/Vis.js-Topology-orange?style=flat)
+![Metasploit](https://img.shields.io/badge/Metasploit-Ready-black?style=flat&logo=metasploit&logoColor=white)
 
 Follow these steps to deploy the framework on your local machine or VPS.
 
@@ -162,7 +174,10 @@ python cli_tool.py -t example.com -m medium -o
 ---
 
 ## 👨‍💻 Credits
-
+![Stars](https://img.shields.io/github/stars/trmxvibs/Net-Sentry?style=social)
+![Forks](https://img.shields.io/github/forks/trmxvibs/Net-Sentry?style=social)
+![Issues](https://img.shields.io/github/issues/trmxvibs/Net-Sentry)
+![Repo Size](https://img.shields.io/github/repo-size/trmxvibs/Net-Sentry)
 **Developed by:** Lokesh kumar
 **Version:** 29.0 
 **License:** MIT License
