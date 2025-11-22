@@ -1,0 +1,37 @@
+name: Net-Sentry Daily Auto-Update
+
+# Trigger: Kab chalna hai?
+on:
+  schedule:
+    - cron: '0 0 * * *' 
+  workflow_dispatch:     
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Code download karo
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # 2. Python Install karo
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    # 3. Date Update karo (Dummy Update to keep repo alive)
+    - name: Update Timestamp
+      run: |
+        echo "LAST SYSTEM CHECK: $(date)" > system_status.txt
+        echo "STATUS: NET-SENTRY OPERATIONAL" >> system_status.txt
+
+    # 4. Changes ko save (Commit) karo
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "Net-Sentry Bot"
+        git config --global user.email "bot@netsentry.local"
+        git add system_status.txt
+        git commit -m "Daily System Status Check [Auto]" || exit 0
+        git push
