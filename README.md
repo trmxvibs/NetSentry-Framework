@@ -178,6 +178,7 @@ python cli_tool.py -t example.com -m medium -o
 ![Forks](https://img.shields.io/github/forks/trmxvibs/Net-Sentry?style=social)
 ![Issues](https://img.shields.io/github/issues/trmxvibs/Net-Sentry)
 ![Repo Size](https://img.shields.io/github/repo-size/trmxvibs/Net-Sentry)
+---
 **Developed by:** Lokesh kumar
 **Version:** 29.0 
 **License:** MIT License
