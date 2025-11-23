@@ -1,8 +1,10 @@
+#lokesh kumar
+#github.com/trmxvibs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Net-Sentry v23.0 | GOD MODE</title>
+    <title>Net-Sentry v23.0 </title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -11,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- HACKER THEME --- */
+        /* ---  THEME --- */
         :root { 
             --bg: #050505; 
             --panel: #0a0f14; 
@@ -34,7 +36,7 @@
             background-size: 20px 20px;
         }
 
-        /* --- MAIN LAYOUT (GRID) --- */
+        /* --- MAIN LAYOUT --- */
         .main-layout {
             display: grid;
             grid-template-columns: 45% 1fr; /* Left (Terminal) | Right (Maps & Info) */
@@ -313,14 +315,23 @@ async function processCommand(raw) {
     
     // 1. INTERNAL COMMANDS (Net-Sentry Specific)
     if (cmd === 'help') {
-        printHTML(`<div style="color:#888">
-            <span class="txt-gold">scan &lt;target&gt;</span> ... Start Scan<br>
-            <span class="txt-gold">exec &lt;cmd&gt;</span> ...... Run System Command (e.g., exec ping 8.8.8.8)<br>
-            <span class="txt-gold">man &lt;tool&gt;</span> ...... Cheat Sheets<br>
-            <span class="txt-gold">reset</span> ............. Wipe DB<br>
-            <span class="txt-gold">clear</span> ............. Clear Screen
-        </div>`);
-    }
+                printHTML(`
+                <table class="help-tbl" style="width:100%; color:#aaa;">
+                    <tr><td colspan="2" class="txt-blue" style="padding-bottom:5px; font-weight:bold;">SCANNING MODES:</td></tr>
+                    <tr><td class="txt-gold">scan &lt;target&gt;</td><td>Basic Scan (Fast, Top 100 Ports)</td></tr>
+                    <tr><td class="txt-gold">scan &lt;target&gt; medium</td><td>Standard (Versions, 1000 Ports)</td></tr>
+                    <tr><td class="txt-gold">scan &lt;target&gt; advance</td><td>Full Power (Vulns, Fuzzing, Spider)</td></tr>
+                    <tr><td class="txt-gold">scan &lt;target&gt; custom "flags"</td><td>Manual Nmap Flags</td></tr>
+                    
+                    <tr><td colspan="2" class="txt-blue" style="padding-top:10px; padding-bottom:5px; font-weight:bold;">TOOLS:</td></tr>
+                    <tr><td class="txt-gold">man &lt;tool&gt;</td><td>Cheat Sheets (nmap, hydra, sqlmap)</td></tr>
+                    <tr><td class="txt-gold">exec &lt;cmd&gt;</td><td>Run System Command (ping, whois)</td></tr>
+                    
+                    <tr><td colspan="2" class="txt-blue" style="padding-top:10px; padding-bottom:5px; font-weight:bold;">SYSTEM:</td></tr>
+                    <tr><td class="txt-gold">reset</td><td>Wipe Database</td></tr>
+                    <tr><td class="txt-gold">clear</td><td>Clear Screen</td></tr>
+                </table>`);
+            }
     else if (cmd === 'scan') {
         if(!parts[1]) return printLine("Error: Target required.", 'txt-red');
         let mode = parts[2] || "basic";
