@@ -81,7 +81,7 @@ Follow these steps to deploy the framework on your local machine or VPS.
 Get the latest source code from GitHub.
 ```bash
 git clone https://github.com/trmxvibs/NetSentry-Framework
-cd Net-Sentry
+cd NetSentry-Framework
 ```
 ### 2. Install Dependencies
 Install the required Python libraries (Flask, Requests, Vis.js support, etc.).
