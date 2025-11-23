@@ -157,31 +157,13 @@ Save the scan results to a text file for documentation.
 ```
 python cli_tool.py -t example.com -m medium -o
 ```
-##**Tip: The CLI tool uses the exact same engine as the web dashboard, ensuring consistent results across interfaces.**
+**Tip: The CLI tool uses the exact same engine as the web dashboard, ensuring consistent results across interfaces.**
 ---
 
-
-## ⚠️ Legal Disclaimer
-
-> **FOR EDUCATIONAL & AUTHORIZED USE ONLY.**
->
-> Net-Sentry is a powerful security research tool. Scanning targets without prior mutual consent is illegal and punishable by law. The developers assume **no liability** and are not responsible for any misuse or damage caused by this program.
->
-> * **Do not scan** government, military, or unauthorized corporate networks.
-> * **Do not use** for malicious purposes or black-hat hacking.
-> * **Always verify** findings manually before reporting to bug bounty programs.
-
 ---
-
-## 👨‍💻 Credits
-![Stars](https://img.shields.io/github/stars/trmxvibs/Net-Sentry?style=social)
-![Forks](https://img.shields.io/github/forks/trmxvibs/Net-Sentry?style=social)
-![Issues](https://img.shields.io/github/issues/trmxvibs/Net-Sentry)
-![Repo Size](https://img.shields.io/github/repo-size/trmxvibs/Net-Sentry)
----
-**Developed by:** Lokesh kumar
-**Version:** 29.0 
-**License:** MIT License
+- > **Developed by:** Lokesh kumar
+- > **Version:** 29.0 
+- > **License:** MIT License
 
 ---
 
