@@ -1,3 +1,5 @@
+#lokesh kumar
+#github.com/trmxvibs
 import subprocess
 import socket
 import requests
@@ -14,7 +16,7 @@ from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
-# --- 1. UTILITIES & STEALTH ---
+# --- 1. UTILITIES ---
 def clean_target(target):
     target = target.strip()
     if "://" in target: return urlparse(target).hostname
@@ -78,7 +80,7 @@ def consult_oracle(domain):
             vulns = data.get('vulns', [])
             if vulns:
                 report.append(f"   [☠️] KNOWN VULNS: {len(vulns)} FOUND!")
-                for v in vulns[:3]: report.append(f"       > {v}")
+                for v in vulns: report.append(f"       > {v}") # UNRESTRICTED
             else: report.append("   [✓] Clean record.")
     except: pass
     return "\n".join(report)
@@ -94,6 +96,9 @@ def check_zone_transfer(domain):
                 z = dns.zone.from_xfr(dns.query.xfr(ns_ip, domain, timeout=2))
                 if z:
                     report.append(f"   [!!!] CRITICAL: ZONE TRANSFER OPEN on {ns}")
+                    report.append("   [+] Dumping Records:")
+                    for name, node in z.nodes.items(): # UNRESTRICTED
+                        report.append(f"       > {name}.{domain}")
                     vuln = True; break
             except: continue
         if not vuln: report.append("   [✓] DNS Secure.")
@@ -129,11 +134,25 @@ def analyze_ssl_cert(domain):
             extras = [d for d in sans if d != domain]
             if extras:
                 report.append(f"   [SCOPE] Found {len(extras)} hidden domains:")
-                for d in extras[:5]: report.append(f"       > {d}")
+                for d in extras: report.append(f"       > {d}") # UNRESTRICTED
     except: report.append("   [-] SSL Handshake Failed.")
     return "\n".join(report)
 
-# --- 4. OFFENSE & VULNERABILITY ---
+def find_subdomains(domain):
+    report = ["\n[*] PASSIVE SUBDOMAINS:"]
+    try:
+        url = f"https://crt.sh/?q=%.{domain}&output=json"
+        data = requests.get(url, timeout=10).json()
+        subs = set(entry['name_value'].split('\n')[0] for entry in data)
+        valid = [s for s in subs if domain in s]
+        if valid:
+            report.append(f"   [+] Found {len(valid)} subdomains (FULL LIST):")
+            for s in sorted(list(valid)): report.append(f"       > {s}") # UNRESTRICTED
+        else: report.append("   [-] No subdomains found.")
+    except: report.append("   [-] Passive recon failed.")
+    return "\n".join(report)
+
+# --- 4. OFFENSE ---
 def run_nmap_scan(domain, mode, custom_flags):
     if shutil.which("nmap") is None: return "[-] CRITICAL: Nmap not installed."
     try: ip = socket.gethostbyname(domain)
@@ -151,62 +170,37 @@ def run_nmap_scan(domain, mode, custom_flags):
         return process.stdout
     except Exception as e: return f"[-] Nmap Error: {e}"
 
-# --- NEW: DEEP VULNERABILITY SCANNER ---
 def deep_vuln_scanner(domain):
     report = ["\n[*] DEEP VULNERABILITY SCAN (LFI/CONFIG):"]
     base_url = f"http://{domain}"
     
-    # 1. CONFIG & BACKUP FILES (High Impact)
-    critical_files = [
-        ".env", ".git/config", ".vscode/sftp.json", "docker-compose.yml",
-        "wp-config.php.bak", "config.php.bak", "id_rsa", "backup.sql"
-    ]
-    
-    found_config = False
+    critical_files = [".env", ".git/config", ".vscode/sftp.json", "docker-compose.yml", "wp-config.php.bak"]
+    found = False
     for f in critical_files:
         try:
-            url = f"{base_url}/{f}"
-            r = requests.get(url, headers=get_bypass_headers(), timeout=2)
-            if r.status_code == 200 and len(r.text) > 0:
-                # Verify it's not a fake 200 page
-                if "html" not in r.text.lower():
-                    report.append(f"   [☠️] CRITICAL LEAK: {f} FOUND!")
-                    report.append(f"       > Content Snippet: {r.text[:50]}...")
-                    found_config = True
+            r = requests.get(f"{base_url}/{f}", headers=get_bypass_headers(), timeout=2)
+            if r.status_code == 200 and "html" not in r.text.lower():
+                report.append(f"   [☠️] CRITICAL LEAK: {f} FOUND!")
+                found = True
         except: pass
-    
-    if not found_config: report.append("   [✓] No config backups exposed.")
+    if not found: report.append("   [✓] No config backups exposed.")
 
-    # 2. LFI (Local File Inclusion) CHECK
-    # Look for URL params and fuzz them
     try:
         r = requests.get(base_url, headers=get_bypass_headers(), timeout=3)
         soup = BeautifulSoup(r.text, 'html.parser')
-        lfi_payloads = ["../../../../etc/passwd", "c:/windows/win.ini"]
-        
         vuln_lfi = False
         for a in soup.find_all('a', href=True):
             if "=" in a['href']:
-                target_param_url = urljoin(base_url, a['href'])
-                # Replace param value with payload
-                # Simple check: assume param is at the end
-                base, param = target_param_url.split('=', 1)
-                
-                for pay in lfi_payloads:
-                    fuzz_url = f"{base}={pay}"
-                    try:
-                        fr = requests.get(fuzz_url, timeout=3)
-                        if "root:x:0:0" in fr.text or "[extensions]" in fr.text:
-                            report.append(f"   [☠️] LFI VULNERABILITY DETECTED!")
-                            report.append(f"       > URL: {fuzz_url}")
-                            vuln_lfi = True
-                            break
-                    except: pass
-            if vuln_lfi: break
-            
+                base, param = urljoin(base_url, a['href']).split('=', 1)
+                fuzz_url = f"{base}=../../../../etc/passwd"
+                try:
+                    fr = requests.get(fuzz_url, timeout=3)
+                    if "root:x:0:0" in fr.text:
+                        report.append(f"   [☠️] LFI DETECTED: {fuzz_url}")
+                        vuln_lfi = True; break
+                except: pass
         if not vuln_lfi: report.append("   [✓] LFI check passed.")
     except: pass
-
     return "\n".join(report)
 
 def crawl_website_data(domain):
@@ -227,19 +221,41 @@ def crawl_website_data(domain):
             if s.get('src'): scripts.append(s.get('src'))
             elif s.get('data-src'): scripts.append(s.get('data-src'))
             
-        report.append(f"   [i] Analyzing {len(scripts)} JavaScript files...")
+        report.append(f"   [i] Analyzing {len(scripts)} JavaScript files (FULL SCAN)...")
         
-        for script in scripts[:5]:
+        endpoints = set()
+        # UNRESTRICTED: Scan up to 50 scripts now
+        for script in scripts[:50]:
             if not script.startswith("http"): 
                 if script.startswith("//"): script = "https:" + script
                 else: script = urljoin(url, script)
             try:
                 js_code = requests.get(script, headers=get_bypass_headers(), timeout=5).text
+                
+                paths = re.findall(r"['\"](\/[a-zA-Z0-9_/-]+)['\"]", js_code)
+                for p in paths:
+                    if len(p) > 4 and "//" not in p: endpoints.add(p)
+                
                 for name, pat in secrets.items():
                     keys = re.findall(pat, js_code)
                     for k in keys: report.append(f"   [$$$] KEY LEAK ({name}) in JS: {k}")
             except: pass
+            
+        if endpoints:
+            report.append(f"   [+] Found {len(endpoints)} hidden API endpoints (FULL LIST):")
+            for ep in sorted(list(endpoints)): report.append(f"       > {ep}") # UNRESTRICTED
     except: report.append("   [-] Spider failed.")
+    return "\n".join(report)
+
+def check_cve_vulnerabilities(text):
+    report = ["\n[*] CVE CHECK:"]
+    exploits = {"vsftpd 2.3.4": "CVE-2011-2523", "Apache 2.4.49": "CVE-2021-41773"}
+    found = False
+    for soft, cve in exploits.items():
+        if soft in text:
+            report.append(f"   [☠️] VULNERABLE: {soft} -> {cve}")
+            found = True
+    if not found: report.append("   [✓] No signature match.")
     return "\n".join(report)
 
 def detect_tech_stack(domain):
@@ -275,9 +291,8 @@ def calculate_risk_score(scan_result):
     score += len(re.findall(r"\d+/tcp\s+open", scan_result)) * 5
     if "[☠️]" in scan_result: score += 50
     if "[$$$]" in scan_result: score += 40
-    if "CRITICAL LEAK" in scan_result: score += 60 # High impact
-    if "LFI VULNERABILITY" in scan_result: score += 70 # Critical
-    if "WAF DETECTED" in scan_result: score -= 10
+    if "403 BYPASSED" in scan_result: score += 30
+    if "hidden API endpoints" in scan_result: score += 15
     if score > 100: score = 100
     return score
 
@@ -297,8 +312,8 @@ def scan_target(domain, mode="basic", custom_flags="", previous_result=None, web
         if mode != "basic":
             futures["spider"] = executor.submit(crawl_website_data, clean_host)
             futures["tech"] = executor.submit(detect_tech_stack, clean_host)
-            # NEW VULN SCANNER (Runs in all modes except basic)
             futures["vuln"] = executor.submit(deep_vuln_scanner, clean_host)
+            futures["subdomain"] = executor.submit(find_subdomains, clean_host) # Added explicit call
         
         if mode == "advance":
             futures["zone"] = executor.submit(check_zone_transfer, clean_host)
@@ -315,14 +330,14 @@ def scan_target(domain, mode="basic", custom_flags="", previous_result=None, web
     final.append(results_dict.get("oracle",""))
     final.append(results_dict.get("waf",""))
     final.append(results_dict.get("ssl",""))
+    if "subdomain" in results_dict: final.append(results_dict["subdomain"])
+    if "zone" in results_dict: final.append(results_dict["zone"])
     
     scan_out = results_dict.get("nmap","")
     final.append(scan_out)
     
-    # Vuln Results
     if "vuln" in results_dict: final.append(results_dict["vuln"])
     if "spider" in results_dict: final.append(results_dict["spider"])
-    if "zone" in results_dict: final.append(results_dict["zone"])
     
     tech_res = results_dict.get("tech", ("", []))
     if isinstance(tech_res, tuple): final.append(tech_res[0])
