@@ -1,3 +1,9 @@
+#database-setup
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import sqlite3
 
 DB_NAME = "netsentry.db"
@@ -36,4 +42,5 @@ def init_db():
         print(f"[-] Database Error: {e}")
 
 if __name__ == "__main__":
+
     init_db()
