@@ -1,3 +1,8 @@
+#validtor.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import requests
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -29,4 +34,5 @@ def validate_found_key(platform, key):
     if platform == "Google": return validate_google_key(key)
     elif platform == "Stripe": return validate_stripe_key(key)
     elif platform == "Mailgun": return validate_mailgun_key(key)
+
     return "[i] No auto-validation available."
