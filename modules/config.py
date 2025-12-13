@@ -1,3 +1,9 @@
+#config.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import random
 import requests
 from modules.proxy_manager import proxy_rotator
@@ -65,4 +71,5 @@ def make_request(url, method="GET", data=None, headers=None, timeout=10):
         try:
             if method == "GET": return requests.get(url, headers=headers, timeout=timeout, verify=False)
             else: return requests.post(url, headers=headers, data=data, timeout=timeout, verify=False)
+
         except: return None
