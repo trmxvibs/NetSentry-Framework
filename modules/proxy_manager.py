@@ -1,3 +1,9 @@
+#proxy_manager.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import requests
 import random
 import time
@@ -39,4 +45,5 @@ class ProxyManager:
             return "Connection Failed"
 
 # Global Instance
+
 proxy_rotator = ProxyManager()
