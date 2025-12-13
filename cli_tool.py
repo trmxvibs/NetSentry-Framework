@@ -1,3 +1,9 @@
+#cli_tool.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import argparse
 import os
 import time
@@ -8,8 +14,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from scanner_engine import scan_target
 
-# --- ADVANCED COLOR ENGINE ---
-# Windows CMD me colors enable karne ke liye
+
 os.system('')
 
 class Colors:
@@ -52,7 +57,7 @@ def print_banner():
     ██║ ╚████║███████╗   ██║         ███████║███████╗██║ ╚████║   ██║   ██║  ██║   ██║   
     ╚═╝  ╚═══╝╚══════╝   ╚═╝         ╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   
     {Colors.RESET}
-    {Colors.NEON_PURPLE}    [ v64.0 - GOD MODE ] {Colors.RESET} | {Colors.NEON_GREEN} [ SYSTEM ONLINE ] {Colors.RESET} | {Colors.NEON_YELLOW} [ AUTHORIZED USE ONLY ] {Colors.RESET}
+    {Colors.NEON_PURPLE}    [ GOD MODE ] {Colors.RESET} | {Colors.NEON_GREEN} [ SYSTEM ONLINE ] {Colors.RESET} | {Colors.NEON_YELLOW} [ AUTHORIZED USE ONLY ] {Colors.RESET}
     {Colors.DIM}    --------------------------------------------------------------------------{Colors.RESET}
     """
     print(banner)
@@ -173,4 +178,5 @@ def main():
         print(f"\n{Colors.BG_RED}[!] CRITICAL SYSTEM FAILURE: {e}{Colors.RESET}")
 
 if __name__ == "__main__":
+
     main()
