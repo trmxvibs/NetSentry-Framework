@@ -1,3 +1,8 @@
+#web.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -6,7 +11,7 @@ from modules.config import get_bypass_headers
 from modules.validator import validate_found_key
 import dns.resolver
 
-# --- DEFENSE MODULES ---
+
 def detect_waf(domain):
     report = []
     waf_sigs = {"Cloudflare": "cf-ray", "AWS": "x-amz-cf-id", "Akamai": "x-akamai", "Imperva": "x-iinfo"}
@@ -86,7 +91,7 @@ def crawl_website_data(domain):
 
         soup = BeautifulSoup(html, 'html.parser')
 
-        # --- [NEW] HTML ANCHOR EXTRACTION ---
+        # ---  HTML ANCHOR EXTRACTION ---
         # Standard links (e.g. <a href="artists.php?artist=1">)
         for a in soup.find_all('a', href=True):
             href = a['href']
@@ -211,4 +216,5 @@ def check_broken_links(domain):
             
         if not vuln: report.append("   [✓] External links resolve correctly.")
     except: report.append("   [-] BLH check failed.")
+
     return "\n".join(report)
