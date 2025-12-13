@@ -1,0 +1,8 @@
+Flask==3.0.0
+requests==2.31.0
+dnspython==2.4.2
+beautifulsoup4==4.12.2
+fpdf==1.7.2
+python-whois==0.8.0
+Werkzeug==3.0.1
+urllib3==2.1.0
