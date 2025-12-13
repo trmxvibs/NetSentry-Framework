@@ -1,3 +1,8 @@
+#k8s_hunter.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import urllib3
 from modules.config import make_request
 
@@ -45,4 +50,5 @@ def check_k8s_exposure(domain):
     if not vuln_found:
         report.append("   [✓] Kubernetes & Cloud endpoints appear secured.")
         
+
     return "\n".join(report)
