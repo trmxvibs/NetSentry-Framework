@@ -1,3 +1,9 @@
+#intel.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import socket
 import requests
 import whois
@@ -70,4 +76,5 @@ def fetch_wayback_urls(domain):
     except Exception as e:
         report.append(f"   [-] Time travel failed: {str(e)}")
         
+
     return "\n".join(report), []
