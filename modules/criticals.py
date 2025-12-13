@@ -1,3 +1,9 @@
+#criticals.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import requests
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
 from modules.config import get_bypass_headers
@@ -78,4 +84,5 @@ def check_clickjacking(domain):
         else:
             report.append(f"   [⚠️] VULNERABLE: X-Frame-Options missing!")
     except: report.append("   [-] Clickjacking check failed.")
+
     return "\n".join(report)
