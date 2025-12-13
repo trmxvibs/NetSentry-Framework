@@ -1,3 +1,10 @@
+#app.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file, Response
 from functools import wraps
 import sqlite3
@@ -20,7 +27,7 @@ from scanner_engine import scan_target, get_system_info
 from modules.report_builder import generate_html_report
 
 app = Flask(__name__)
-app.secret_key = "NETSENTRY_ULTIMATE_KEY_V65"
+app.secret_key = "NETSENTRY_ULTIMATE_KEY"
 DB_NAME = "netsentry.db"
 
 # Disable default Flask logs for cleaner terminal
@@ -283,4 +290,5 @@ if __name__ == "__main__":
     print("="*50 + "\n")
     
     # Run on 0.0.0.0 to allow LAN connections
+
     app.run(host='0.0.0.0', port=port, debug=False)
