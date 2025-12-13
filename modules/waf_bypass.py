@@ -1,3 +1,8 @@
+#waf_bypass.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import urllib.parse
 
 def waf_encoder(payload, level="medium"):
@@ -36,5 +41,6 @@ def generate_bypass_payloads(original_payload):
         waf_encoder(original_payload, "medium"),
         waf_encoder(original_payload, "aggressive")
     ]
-    # Filter unique only
+   
+
     return list(set(variations))
