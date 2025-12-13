@@ -1,8 +1,12 @@
+#MainEngineHere
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import requests
 import socket
 from concurrent.futures import ThreadPoolExecutor
-
-# --- IMPORTS FROM MODULES ---
 from modules.utils import clean_target, get_system_info 
 from modules.intel import get_domain_intel, consult_oracle
 from modules.network import run_nmap_scan, analyze_ssl_cert, find_subdomains, check_zone_transfer, active_subdomain_enum
@@ -14,8 +18,6 @@ from modules.risk import calculate_risk_score
 from modules.ai_strategist import analyze_attack_strategy
 from modules.k8s_hunter import check_k8s_exposure
 from modules.dark_intel import search_leaks
-
-# [FIXED] ALL VULNERABILITY IMPORTS (COMPLETE LIST)
 from modules.vulnerability import (
     deep_vuln_scanner, check_cve_vulnerabilities, directory_buster, 
     check_mass_takeover, enumerate_cms_users, check_ssrf, 
@@ -28,8 +30,8 @@ from modules.vulnerability import (
     check_request_smuggling, check_websocket_security, 
     check_hpp, check_cache_poisoning, 
     check_ssi_injection, check_xpath_injection,
-    check_xxe, check_idor_patterns,   # <--- ADDED MISSING IMPORTS
-    crack_jwt_secret                  # <--- ADDED MISSING IMPORT
+    check_xxe, check_idor_patterns,  
+    crack_jwt_secret                  
 )
 
 def scan_target(domain, mode="basic", custom_flags="", previous_result=None, webhook=""):
@@ -203,4 +205,5 @@ def scan_target(domain, mode="basic", custom_flags="", previous_result=None, web
         try: requests.post(webhook, json={"content": f"Scan Finished: {clean_host}\nRisk: {score}"})
         except: pass
     
+
     return final_report
