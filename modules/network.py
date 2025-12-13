@@ -1,3 +1,9 @@
+#network.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import socket
 import ssl
 import shutil
@@ -128,4 +134,5 @@ def run_nmap_scan(domain, mode, custom_flags):
         process = subprocess.run(cmd, capture_output=True, text=True, timeout=900)
         return process.stdout
     except subprocess.TimeoutExpired: return "[-] Nmap Scan Timed Out."
+
     except Exception as e: return f"[-] Nmap Error: {e}"
