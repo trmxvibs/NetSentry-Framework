@@ -2,15 +2,14 @@
 #Date-13/12/2025
 #Author- Lokesh Kumar
 #github - @trmxvibs
-#Madeinindiaimport re
+#Madeinindia
+import re
 from modules.config import make_request
 
 def search_leaks(domain):
     report = ["\n[*] DARK INTEL (OSINT & LEAKS):"]
     found_leaks = False
     
-   
-   
     dorks = [
         f"site:pastebin.com {domain} password",
         f"site:github.com {domain} API_KEY",
@@ -22,14 +21,12 @@ def search_leaks(domain):
     for dork in dorks:
         report.append(f"       > Google Query: {dork}")
         
-   
-   
     report.append(f"   [i] Breach Database Check:")
    
     targets = [f"admin@{domain}", f"root@{domain}", f"info@{domain}"]
     
-      report.append(f"       > Monitoring {len(targets)} high-value accounts.")
+    
+    report.append(f"       > Monitoring {len(targets)} high-value accounts.")
     report.append(f"       > Status: [INFO] Use 'H8mail' tool for deep password dumping.")
-
 
     return "\n".join(report)
