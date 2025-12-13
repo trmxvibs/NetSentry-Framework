@@ -1,3 +1,9 @@
+#Ai_Strategist.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import re
 
 def analyze_attack_strategy(scan_result, tech_list):
@@ -44,4 +50,5 @@ def analyze_attack_strategy(scan_result, tech_list):
     if len(strategy) == 1:
         strategy.append("   [i] Target is hardened. Recommended: Social Engineering or Phishing.")
         
+
     return "\n".join(strategy)
