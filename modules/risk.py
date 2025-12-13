@@ -1,3 +1,8 @@
+#risk.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import re
 
 def calculate_risk_score(scan_result):
@@ -28,4 +33,5 @@ def calculate_risk_score(scan_result):
     # Return 0 if nothing significant found but ensure low score isn't misleading
     if score == 0 and open_ports > 0: score = 10
     
+
     return score
