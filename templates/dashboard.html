@@ -1,8 +1,14 @@
+#Dashboard--HTML
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Net-Sentry v23.0 | GOD MODE</title>
+    <title>Net-Sentry  | GOD MODE</title>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -11,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- HACKER THEME --- */
+       
         :root { 
             --bg: #050505; 
             --panel: #0a0f14; 
@@ -80,7 +86,7 @@
             align-items: center;
         }
 
-        /* --- 1. TERMINAL (Left Side) --- */
+        /* --- 1. TERMINAL  --- */
         .area-term {
             grid-column: 1 / 2;
             grid-row: 2 / 4;
@@ -112,14 +118,14 @@
             outline: none;
         }
 
-        /* --- 2. MAPS (Top Right) --- */
+        /* --- 2. MAPS  --- */
         .area-map {
             grid-column: 2 / 3;
             grid-row: 2 / 3;
         }
         #network-map, #geo-map { width: 100%; height: 100%; }
         
-        /* --- 3. INFO & LOGS (Bottom Right) --- */
+        /* --- 3. INFO & LOGS  --- */
         .area-info {
             grid-column: 2 / 3;
             grid-row: 3 / 4;
@@ -352,8 +358,7 @@ async function processCommand(raw) {
     else if (cmd === 'clear') { term.innerHTML = ""; }
     else if (cmd === 'reset') { factoryReset(); }
     
-    // 2. SYSTEM BRIDGE (The New Power)
-    // Agar command internal nahi hai, to use System par run karo
+    
     else {
         printLine(`> Executing on System Shell: ${raw}`, 'txt-gold');
         
@@ -484,7 +489,7 @@ async function processCommand(raw) {
             network.setData({nodes, edges});
         }
 
-        // B. GEO MAP (Leaflet)
+        // B. GEO MAP 
         function initGeoMap() {
             geoMap = L.map('geo-map').setView([20, 0], 2);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -523,4 +528,5 @@ async function processCommand(raw) {
         setInterval(poll, 3000);
     </script>
 </body>
+
 </html>
