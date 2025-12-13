@@ -1,3 +1,9 @@
+#cve_lookup.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import re
 
 def get_exploit_db():
@@ -38,4 +44,5 @@ def analyze_services_for_cve(nmap_output):
     if not found_cve:
         report.append("   [✓] No widely known legacy exploits matched in local DB.")
         
+
     return "\n".join(report), found_cve
