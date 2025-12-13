@@ -1,3 +1,8 @@
+#infrastructure.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import socket
 import requests
 from modules.config import get_bypass_headers
@@ -98,4 +103,5 @@ def scan_infrastructure(domain, scan_text):
     if "2375" in scan_text or "9200" in scan_text or "Docker" in scan_text:
         results.append(check_elastic_kibana(domain))
         
+
     return "\n".join([r for r in results if r])
