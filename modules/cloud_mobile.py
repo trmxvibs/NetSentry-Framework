@@ -1,3 +1,9 @@
+#cloud_mobile.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
+
 import requests
 import json
 from urllib.parse import urljoin # Safer for joining URLs
@@ -58,4 +64,5 @@ def check_mobile_configs(domain):
         except: pass
         
     if not found: report.append("   [-] No mobile configuration files found.")
+
     return "\n".join(report)
