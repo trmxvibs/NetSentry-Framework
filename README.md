@@ -1,18 +1,36 @@
-#  NET-SENTRY
-> **The Ultimate Automated Reconnaissance & Vulnerability Assessment System**
+# 🛡️ NET-SENTRY Framework
+> **The Ultimate Automated Red Teaming & Vulnerability Assessment System**
 
-
-![Version](https://img.shields.io/badge/Version-v29.0_God_Mode-FF0055?style=for-the-badge&logo=hackthebox&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Version](https://img.shields.io/badge/God_Mode-FF0055?style=for-the-badge&logo=hackthebox&logoColor=white)
+![Security](https://img.shields.io/badge/Security-Offensive-red?style=for-the-badge&logo=security)
 ![Status](https://img.shields.io/badge/Status-OPERATIONAL-success?style=for-the-badge&logo=activity)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Maintenance](https://img.shields.io/badge/Maintenance-Active-chartreuse?style=for-the-badge)
+![Security](https://img.shields.io/badge/Security-Offensive-red?style=for-the-badge&logo=kali-linux&logoColor=white)
+![Maintenance](https://img.shields.io/badge/Maintenance-Active-chartreuse?style=for-the-badge&logo=github)
+![MadeIn](https://img.shields.io/badge/MADE%20IN-INDIA-orange?style=for-the-badge&logo=india&logoColor=white)
 
-**Net-Sentry** is a military-grade offensive security framework designed to automate the reconnaissance and vulnerability assessment phase. It combines the power of multiple scanning engines into a single **Unified Command Console**.
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-Backend-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Nmap](https://img.shields.io/badge/Nmap-Engine-blue?style=for-the-badge&logo=nmap&logoColor=white)
+![Database](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
-It replaces manual grunt work with automation, allowing security researchers to focus on strategy. Net-Sentry delivers deep intelligence, vulnerability analysis, and actionable reports.
+![Code Size](https://img.shields.io/github/languages/code-size/trmxvibs/NetSentry-Framework?style=for-the-badge&color=blueviolet)
+![Issues](https://img.shields.io/github/issues/trmxvibs/NetSentry-Framework?style=for-the-badge&color=yellow)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=open-source-initiative&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-lightgrey?style=for-the-badge&logo=linux)
+
+![Stars](https://img.shields.io/github/stars/trmxvibs/NetSentry-Framework?style=for-the-badge&logo=github&color=gold)
+![Forks](https://img.shields.io/github/forks/trmxvibs/NetSentry-Framework?style=for-the-badge&logo=github&color=silver)
+![Follow](https://img.shields.io/github/followers/trmxvibs?style=for-the-badge&logo=github&label=Follow&color=181717)
+
+**Net-Sentry** is a military-grade offensive security framework designed to automate the reconnaissance and vulnerability assessment phase. It replaces manual grunt work with a **Unified Command Console**, allowing security researchers to focus on strategy while the AI handles the execution.
+
+Now powered by a **Concurrent Scanning Engine**, Net-Sentry delivers deep intelligence, cloud analysis, and actionable reports at 15x speed.
 
 ---
+
+
+
 ##  Key Features 
 
 Net-Sentry operates on a modular architecture, deploying specialized engines for every stage of the kill chain.
@@ -74,7 +92,20 @@ Before deploying Net-Sentry, ensure your system meets the following requirements
 ![Leaflet](https://img.shields.io/badge/Leaflet-Maps-199900?style=flat&logo=leaflet&logoColor=white)
 ![Vis.js](https://img.shields.io/badge/Vis.js-Topology-orange?style=flat)
 ![Metasploit](https://img.shields.io/badge/Metasploit-Ready-black?style=flat&logo=metasploit&logoColor=white)
+<div align="center">
+  
+  <br>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=25&pause=1000&color=00FF00&center=true&vCenter=true&width=600&lines=System+Initializing...;Target+Locked+%3A+Scanning+Ports...;Brute-Forcing+Directories...;Bypassing+WAF+Firewall...;NET-SENTRY+OPERATIONAL" alt="Typing SVG" />
+  </a>
+  <br>
 
+  ![Modules](https://img.shields.io/badge/Modules-15%2B_Loaded-purple?style=flat-square&logo=component)
+  ![Speed](https://img.shields.io/badge/Speed-Hyper_Threaded-orange?style=flat-square&logo=speedtest)
+  ![AI](https://img.shields.io/badge/AI-Neural_Network-blue?style=flat-square&logo=openai)
+  ![Database](https://img.shields.io/badge/Logs-Encrypted-critical?style=flat-square&logo=sqlite)
+
+</div>
 Follow these steps to deploy the framework on your local machine or VPS.
 
 ### 1. Clone the Repository
@@ -94,7 +125,7 @@ Run the setup script to create the SQLite database and the default admin user.
 python database_setup.py
 ```
 
-### **Success Check:** You should see the message: [+] Default User Created: admin / password
+### **Success Check:** You should see the message: [+] Default User Created: lokesh/lokesh
 
 ---
 
@@ -106,14 +137,14 @@ Start the web server:
 ```bash
 python app.py
 ```
-### Console Output: [+] Net-Sentry v29.0 Online. Access: http://127.0.0.1:5000
+### Console Output: [+] Net-Sentry Online. Access: http://127.0.0.1:(port)
 
 ### 2. Access & Login
-Open your browser and navigate to http://127.0.0.1:5000.
+Open your browser and navigate to http://127.0.0.1:(port)
 
-Default Username: `admin`
+Default Username: `lokesh`
 
-Default Password: `password`
+Default Password: `lokesh`
 
 **Security Note: Change your password immediately using the ⚙️ SETTINGS button in the dashboard header.**
 ---
@@ -161,11 +192,33 @@ python cli_tool.py -t example.com -m medium -o
 ---
 
 ---
-- > **Developed by:** Lokesh kumar
-- > **Version:** 29.0 
-- > **License:** MIT License
+<div align="center">
 
----
+### Connect with Me
+
+<a href="https://github.com/trmxvibs">
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
+</a>
+<a href="https://www.instagram.com/termuxvibes/">
+  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+</a>
+
+
+<br><br>
+
+![Visitors](https://visit-count.netlify.app/visits.svg)
+![Repo Size](https://img.shields.io/github/repo-size/trmxvibs/NetSentry-Framework?style=flat&color=green)
+![Last Commit](https://img.shields.io/github/last-commit/trmxvibs/NetSentry-Framework?style=flat&color=blue)
+
+<br>
+
+![Built With](https://img.shields.io/badge/Built%20With-Caffeine%20%26%20Code-black?style=plastic)
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=00FF00&height=100&section=footer&text=SYSTEM%20OFFLINE&fontSize=20&fontAlign=50&fontColor=000000" width="100%">
+</p>
+
+</div>
 
 
 
