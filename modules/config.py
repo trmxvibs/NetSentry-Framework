@@ -53,12 +53,10 @@ def get_bypass_headers():
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
     }
 
-# [NEW] Central Request Maker
-# Ab hum har jagah `requests.get` ki jagah `make_request` use kar sakte hain
 def make_request(url, method="GET", data=None, headers=None, timeout=10):
     if headers is None: headers = get_bypass_headers()
     
-    # Get Proxy from our new Manager
+   
     proxies = proxy_rotator.get_proxy()
     
     try:
@@ -73,3 +71,4 @@ def make_request(url, method="GET", data=None, headers=None, timeout=10):
             else: return requests.post(url, headers=headers, data=data, timeout=timeout, verify=False)
 
         except: return None
+
