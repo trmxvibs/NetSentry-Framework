@@ -1,3 +1,8 @@
+#report_builder.py
+#Date-13/12/2025
+#Author- Lokesh Kumar
+#github - @trmxvibs
+#Madeinindia
 import re
 import os
 import json
@@ -112,4 +117,5 @@ class HTMLReportGenerator:
 
 def generate_html_report(domain, scan_text, score):
     generator = HTMLReportGenerator(domain, scan_text, score)
+
     return generator.generate_html()
