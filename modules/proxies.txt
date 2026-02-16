@@ -1,0 +1,14 @@
+# ==========================================
+# PROXY CONFIGURATION FILE
+# ==========================================
+# Instructions:
+# 1. Add your proxies list below.
+# 2. Supported Formats:
+#    - IP:PORT (e.g., 192.168.1.1:8080)
+#    - USER:PASS@IP:PORT (e.g., user:pass@192.168.1.1:8080)
+#
+# Note: Lines starting with '#' are ignored.
+# ==========================================
+
+# Paste your proxies below here:
+# Before fill it enable function in proxy_manager.py 82,83,84
