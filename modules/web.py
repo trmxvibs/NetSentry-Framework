@@ -1,8 +1,10 @@
 #web.py
 #Date-13/12/2025
 #Author- Lokesh Kumar
+#update-on-16/02/2026
 #github - @trmxvibs
 #Madeinindia
+
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -10,7 +12,6 @@ from urllib.parse import urljoin, urlparse
 from modules.config import get_bypass_headers
 from modules.validator import validate_found_key
 import dns.resolver
-
 
 def detect_waf(domain):
     report = []
@@ -48,7 +49,6 @@ def detect_tech_stack(domain):
 
 def audit_cloud_buckets(html_content):
     report = []
-    # Regex for S3 buckets
     buckets = set(re.findall(r'([\w-]+\.s3\.amazonaws\.com)', html_content))
     buckets.update(set(re.findall(r's3://([\w-]+)', html_content)))
     if not buckets: return ""
@@ -64,52 +64,60 @@ def audit_cloud_buckets(html_content):
         except: pass
     return "\n".join(report)
 
-# --- DOM & KEY HUNTER ---
+# --- DOM & KEY HUNTER (FIXED) ---
 def crawl_website_data(domain):
     report = ["\n[*] JS MINER & DOM HUNTER:"]
     url = f"http://{domain}"
     html = ""
     endpoints = set()
-    
+    found_keys = set() # Duplicate keys avoid karne ke liye
+
+    # Regex Patterns for Secrets
+    secrets = {
+        "AWS": r"(AKIA[0-9A-Z]{16})", 
+        "Google": r"(AIza[0-9A-Za-z-_]{35})",
+        "Stripe": r"(pk_live_[0-9a-zA-Z]{24})",
+        "Mailgun": r"(pubkey-[0-9a-f]{32})",
+        "Twilio": r"(SK[0-9a-fA-F]{32})",
+        "Slack": r"(xox[baprs]-([0-9a-zA-Z]{10,48}))"
+    }
+
+    # Helper function to scan text for keys
+    def scan_text_for_keys(text, source):
+        for name, pat in secrets.items():
+            keys = re.findall(pat, text)
+            for k in keys:
+                # Handle regex groups (Slack returns a tuple)
+                if isinstance(k, tuple): k = k[0]
+                
+                if k not in found_keys:
+                    found_keys.add(k)
+                    status = validate_found_key(name, k)
+                    report.append(f"   [$$$] KEY LEAK ({name}): {k}")
+                    report.append(f"       └── Found in: {source}")
+                    report.append(f"       └── STATUS: {status}")
+
     try:
         res = requests.get(url, headers=get_bypass_headers(), timeout=10)
         html = res.text
         
-        # 1. Secrets in HTML
-        secrets = {
-            "AWS": r"(AKIA[0-9A-Z]{16})", 
-            "Google": r"(AIza[0-9A-Za-z-_]{35})",
-            "Stripe": r"(pk_live_[0-9a-zA-Z]{24})",
-            "Mailgun": r"(pubkey-[0-9a-f]{32})"
-        }
-        for name, pat in secrets.items():
-            keys = re.findall(pat, html)
-            for k in keys: 
-                status = validate_found_key(name, k)
-                report.append(f"   [$$$] KEY LEAK ({name}): {k}")
-                report.append(f"       └── STATUS: {status}")
+        # 1. Check Main HTML for Secrets
+        scan_text_for_keys(html, "Main HTML")
 
         soup = BeautifulSoup(html, 'html.parser')
 
-        # ---  HTML ANCHOR EXTRACTION ---
-        # Standard links (e.g. <a href="artists.php?artist=1">)
+        # --- HTML ANCHOR EXTRACTION ---
         for a in soup.find_all('a', href=True):
             href = a['href']
-            # Filter junk
             if href.startswith(('#', 'javascript', 'mailto')): continue
             
             full_url = urljoin(url, href)
             parsed = urlparse(full_url)
             
-            # Sirf wahi links lo jo same domain ke hain aur jisme parameters hain
             if domain in parsed.netloc:
-                # Store relative path + query (e.g., /artists.php?artist=1)
                 path_query = f"{parsed.path}"
-                if parsed.query:
-                    path_query += f"?{parsed.query}"
-                
-                if len(path_query) > 1:
-                    endpoints.add(path_query)
+                if parsed.query: path_query += f"?{parsed.query}"
+                if len(path_query) > 1: endpoints.add(path_query)
 
         # 2. JavaScript Analysis
         scripts = []
@@ -119,15 +127,15 @@ def crawl_website_data(domain):
             
         report.append(f"   [i] Analyzing {len(scripts)} JavaScript files...")
         
-        # Dangerous DOM Sinks
         dom_sinks = {
-            "innerHTML": "DOM XSS (Unsafe HTML rendering)",
-            "document.write": "DOM XSS (Old school injection)",
-            "eval(": "RCE/XSS (Dangerous execution)",
-            "location.search": "Unsafe Source (URL Parameter)",
-            "location.hash": "Unsafe Source (Fragment)"
+            "innerHTML": "DOM XSS",
+            "document.write": "DOM XSS",
+            "eval(": "RCE/XSS",
+            "location.search": "Unsafe Source",
+            "location.hash": "Unsafe Source"
         }
 
+        # Analyze top 20 scripts
         for script in scripts[:20]: 
             if not script.startswith("http"): 
                 if script.startswith("//"): script = "https:" + script
@@ -135,7 +143,10 @@ def crawl_website_data(domain):
             try:
                 js_code = requests.get(script, headers=get_bypass_headers(), timeout=5).text
                 
-                # Find Endpoints in JS (Regex)
+                # [FIX] Scan JS for API Keys
+                scan_text_for_keys(js_code, script.split('/')[-1])
+                
+                # Find Endpoints in JS
                 paths = re.findall(r"['\"](\/[a-zA-Z0-9_/-]+)['\"]", js_code)
                 for p in paths:
                     if len(p) > 4 and "//" not in p: endpoints.add(p)
@@ -148,16 +159,10 @@ def crawl_website_data(domain):
             except: pass
             
         if endpoints:
-            report.append(f"   [+] Found {len(endpoints)} crawlable endpoints:")
-            # Sirf top 10 dikhao report mein taaki spam na ho
-            for ep in sorted(list(endpoints))[:10]: 
-                report.append(f"       > {ep}")
-            if len(endpoints) > 10:
-                report.append(f"       ...and {len(endpoints)-10} more.")
+            report.append(f"   [+] Found {len(endpoints)} crawlable endpoints.")
             
     except Exception as e: report.append(f"   [-] Spider failed: {str(e)}")
     
-    # Return HTML for cloud check, and endpoints set for vulnerability scanning
     report.append(audit_cloud_buckets(html))
     return "\n".join(report), endpoints
 
@@ -181,12 +186,12 @@ def check_security_headers(domain):
 def check_spring_boot(domain):
     report = ["\n[*] SPRING BOOT ACTUATOR SCAN:"]
     base_url = f"http://{domain}"
-    endpoints = {"/actuator/env": "Environment Variables", "/actuator/heapdump": "Memory Dump", "/actuator/health": "Health"}
+    endpoints = {"/actuator/env": "Environment Variables", "/actuator/heapdump": "Memory Dump"}
     found = False
     for ep, desc in endpoints.items():
         try:
             r = requests.get(base_url + ep, headers=get_bypass_headers(), timeout=3)
-            if r.status_code == 200 and ("activeProfiles" in r.text or "spring" in r.text or "UP" in r.text):
+            if r.status_code == 200 and ("activeProfiles" in r.text or "spring" in r.text):
                 report.append(f"   [☠️] CRITICAL: {desc} EXPOSED! {ep}")
                 found = True
         except: pass
@@ -203,18 +208,14 @@ def check_broken_links(domain):
         
         if not links: return ""
         vuln = False
-        
         for link in list(links)[:10]:
             try: 
                 hostname = urlparse(link).hostname
-                # If domain doesn't resolve, it's hijackable
                 dns.resolver.resolve(hostname, 'A')
             except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
                 report.append(f"   [☠️] HIJACKABLE DOMAIN: {link}")
                 vuln = True
             except: pass
-            
         if not vuln: report.append("   [✓] External links resolve correctly.")
     except: report.append("   [-] BLH check failed.")
-
     return "\n".join(report)
